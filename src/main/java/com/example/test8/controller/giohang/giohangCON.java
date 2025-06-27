@@ -23,6 +23,7 @@ import java.util.Map;
 
 @Controller
 public class giohangCON {
+    // thử tí
 @Autowired private khachhangSER khachhangSER;
 @Autowired private nhanvienSER nhanvienSER;
 @Autowired private sanphamchitietSER sanphamchitietSER;
