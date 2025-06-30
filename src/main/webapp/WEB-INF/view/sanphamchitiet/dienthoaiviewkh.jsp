@@ -42,7 +42,7 @@
     }
 
     .product-item:hover {
-        transform: translateY(-5px);
+        transform: translateY(-10px);
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
     }
 

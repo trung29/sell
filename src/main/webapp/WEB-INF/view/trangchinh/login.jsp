@@ -13,6 +13,17 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <style>
+    #background-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover; /* Cho video phủ kín giống background-size: cover */
+        z-index: -1; /* Để video nằm dưới toàn bộ nội dung khác */
+        opacity: 0.8; /* Tuỳ chọn: Làm mờ video nếu muốn dễ nhìn chữ */
+        pointer-events: none; /* Để click chuột không bị video cản trở */
+    }
     * {
         margin: 0;
         padding: 0;
@@ -63,6 +74,10 @@
 <body>
 
 <div class="login-container">
+    <video autoplay muted loop id="background-video">
+        <source src="../../../image/background-login.mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ video nền.
+    </video>
     <h4>Đăng nhập</h4>
     <!-- Nếu có lỗi -->
     <c:if test="${not empty sessionScope.loginError}">

@@ -14,45 +14,98 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <style>
-    body {
-        background-color: #f8f9fa;
+    /* ----- Form Upload + Button ----- */
+    form {
+        margin-bottom: 15px;
     }
-    .container {
-        margin-top: 20px;
+
+    form input[type="file"] {
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background-color: #f9f9f9;
     }
-    .btn-add {
-        display: block;
-        width: max-content;
-        margin: 10px auto;
-        font-weight: bold;
+
+    form button {
+        margin-left: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: background-color 0.3s;
     }
-    table {
-        background: #fff;
+
+    form button:hover {
+        background-color: #218838;
+    }
+
+    /* ----- Table Styling ----- */
+    .table {
         border-radius: 8px;
         overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        background-color: white;
     }
-    th, td {
-        text-align: center;
+
+    .table thead {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f2f2f2;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .table td, .table th {
         vertical-align: middle;
+        text-align: center;
+        padding: 10px;
     }
-    img.product-img {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
+
+    /* ----- Action Buttons ----- */
+    .table .btn-sm {
+        padding: 4px 8px;
+        margin: 2px;
         border-radius: 5px;
+        font-size: 0.85rem;
+        transition: 0.3s;
     }
-    .nav-tabs .nav-link {
+
+    .table .btn-warning {
+        background-color: #ffc107;
+        color: black;
+    }
+
+    .table .btn-warning:hover {
+        background-color: #e0a800;
+        color: white;
+    }
+
+    .table .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .table .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    /* ----- Tab Headings ----- */
+    h3.text-center.text-primary {
         font-weight: bold;
-        color: #495057;
+        font-size: 1.5rem;
+        margin: 15px 0;
+        color: #007bff;
     }
-    .nav-tabs .nav-link.active {
-        background-color: #007bff;
-        color: #fff;
-    }
+
 </style>
 <body>
 <%@ include file="../trangchinh/menu1.jsp" %>
 <div class="container" style="margin-bottom: 400px">
+
 
 
     <div class="container mt-3">
@@ -73,6 +126,14 @@
         <div class="tab-content mt-3">
             <c:if test="${sessionScope.nhanvienLogin ne null}">
                 <a href="/sanpham-add" class="btn btn-primary">➕ Thêm sản phẩm mới</a>
+                <br>
+                <form method="post" enctype="multipart/form-data" action="/product/import" style="margin-top: 10px">
+                    <label for="fileUpload" class="btn btn-secondary">📂 Excel</label>
+                    <input id="fileUpload" type="file" name="file" accept=".xlsx" style="display: none;" onchange="showFileName(this)">
+                    <span id="fileName" style="margin-left: 10px;"></span>
+                    <button type="submit" class="btn btn-success">Nhập</button>
+                </form>
+
             </c:if>
             <!-- Tab Điện thoại -->
             <div class="tab-pane fade show active" id="phone">
@@ -182,6 +243,12 @@
     </div>
 </div>
 <%@include file="../trangchinh/footer.jsp"%>
+<script>
+    function showFileName(input) {
+        var fileName = input.files[0] ? input.files[0].name : "Chưa chọn file";
+        document.getElementById("fileName").innerText = fileName;
+    }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
