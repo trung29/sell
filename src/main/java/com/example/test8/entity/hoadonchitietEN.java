@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -25,6 +27,12 @@ public class hoadonchitietEN {
     private int quantity;
     @Column(name = "price")
     private Integer price;
+    @Column(name = "original_price")
+    private Integer originalPrice;
+    @Column(name = "discount_type")
+    private String discounttype;
+    @Column(name = "discount_value")
+    private BigDecimal discountvalue;
     @Column(name = "subtotal")
     private Integer subtotal;
 }

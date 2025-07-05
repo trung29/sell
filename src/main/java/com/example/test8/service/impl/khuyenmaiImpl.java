@@ -14,4 +14,6 @@ public class khuyenmaiImpl implements khuyenmaiSER {
     private khuyenmaiRepo khuyenmaiRepo;
     @Override
     public List<khuyenmaiEN> findAll(){return khuyenmaiRepo.findAll();}
+    @Override
+    public khuyenmaiEN save(khuyenmaiEN khuyenmaiEN){return khuyenmaiRepo.save(khuyenmaiEN);}
 }

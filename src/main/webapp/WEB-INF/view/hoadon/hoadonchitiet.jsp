@@ -34,7 +34,9 @@
             <th>Ảnh</th>
             <th>Sản phẩm</th>
             <th>Số lượng</th>
-            <th>Giá</th>
+            <th>Giá gốc</th>
+            <th>Giảm giá</th>
+
             <th>Thành tiền</th>
         </tr>
         </thead>
@@ -42,11 +44,35 @@
         <c:forEach items="${hoadonChiTietList}" var="ct" varStatus="loop">
             <tr style="text-align: center">
                 <td>${loop.index + 1}</td>
-                <td><img src="../../../image/${ct.sanphamchitietEN.sanphamEN.type}/${ct.sanphamchitietEN.image}" style="width: 30%"></td>
+                <td>
+                    <img src="../../../image/${ct.sanphamchitietEN.sanphamEN.type}/${ct.sanphamchitietEN.image}" style="width: 30%">
+                </td>
                 <td>${ct.sanphamchitietEN.sanphamEN.name}</td>
                 <td>${ct.quantity}</td>
-                <td><fmt:formatNumber value="${ct.price}" type="number" groupingUsed="true"/>đ</td>
-                <td><fmt:formatNumber value="${ct.subtotal}" type="number" groupingUsed="true"/>đ</td>
+
+                <td>
+                    <fmt:formatNumber value="${ct.originalPrice}" type="number" groupingUsed="true"/>đ
+                </td>
+
+                <td>
+                    <c:choose>
+                        <c:when test="${ct.discounttype eq 'phantram'}">
+                            Giảm ${ct.discountvalue}%
+                        </c:when>
+                        <c:when test="${ct.discounttype eq 'tienmat'}">
+                            Giảm <fmt:formatNumber value="${ct.discountvalue}" type="number" groupingUsed="true"/>đ
+                        </c:when>
+                        <c:otherwise>Không có</c:otherwise>
+                    </c:choose>
+                </td>
+
+
+
+
+                <td>
+                    <fmt:formatNumber value="${ct.subtotal}" type="number" groupingUsed="true"/>đ
+                </td>
+
             </tr>
         </c:forEach>
         </tbody>

@@ -161,13 +161,11 @@
         </button>
     </div>
 </div>
-
 <div class="container" style="background: #fff">
     <label id="title">Điện thoại</label>
     <div class="row">
         <c:forEach var="m" items="${sanphamchitiet}">
             <c:if test="${m.sanphamEN.type eq 'dienthoai'}">
-
                 <div class="col-md-3 col-sm-6 mb-4">
                     <a href="sanpham-detail/${m.id}" style="list-style: none; text-decoration: none;color: black">
                         <div class="product-item">
@@ -176,27 +174,46 @@
                             </div>
                             <div class="product-info text-center">
                                 <div class="product-desc">${m.sanphamEN.name}</div>
-                                <div class="product-desc"><b>Số lượng tồn kho:</b> <strong>
-                                    <c:if test="${m.quantity <=0}">
-                                        <b style="color: red">Hết Hàng</b>
-                                    </c:if>
-                                    <c:if test="${m.quantity >0}">
-                                        ${m.quantity}
-                                    </c:if>
-
-
-                                </strong></div>
+                                <div class="product-desc">
+                                    <b>Số lượng tồn kho:</b>
+                                    <strong>
+                                        <c:if test="${m.quantity <= 0}">
+                                            <b style="color: red">Hết Hàng</b>
+                                        </c:if>
+                                        <c:if test="${m.quantity > 0}">
+                                            ${m.quantity}
+                                        </c:if>
+                                    </strong>
+                                </div>
                                 <div class="product-title">
                                     <b>${m.size}</b> - <strong>${m.color}</strong>
                                 </div>
-                                <div class="product-price"> <fmt:formatNumber value="${m.pricespct}" type="number" groupingUsed="true"/>đ</div>
+
+                                <!-- ✅ Giá sản phẩm -->
+                                <div class="product-price">
+                                    <c:choose>
+                                        <c:when test="${m.khuyenmaiEN ne null && m.khuyenmaiEN.status eq 'Hoạt động'}">
+                                            <!-- Giá gốc có gạch ngang -->
+                                            <span style="text-decoration: line-through; color: gray;">
+                                                <fmt:formatNumber value="${m.pricespct}" type="number" groupingUsed="true"/>đ
+                                            </span> -
+                                            <!-- Giá sau giảm màu đỏ -->
+                                            <span style="color: red; font-weight: bold;">
+                                                <fmt:formatNumber value="${m.priceAfterDiscount}" type="number" groupingUsed="true"/>đ
+                                            </span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <!-- Không có khuyến mãi, chỉ hiển thị giá gốc -->
+                                            <fmt:formatNumber value="${m.pricespct}" type="number" groupingUsed="true"/>đ
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
 
                                 <c:if test="${m.quantity > 0}">
                                     <div class="middle">
-<%--                                        <button class="btn1 buy-now-link" data-id="${m.id}"><a href="/cart-add/${m.id}">Mua ngay</a></button>--%>
-
-    <button class="btn1"><a href="/cart-add/${m.id}" class=" buy-now-link" data-id="${m.id}">Thêm giỏ hàng</a></button>
-
+                                        <button class="btn1">
+                                            <a href="/cart-add/${m.id}" class="buy-now-link" data-id="${m.id}">Thêm giỏ hàng</a>
+                                        </button>
                                     </div>
                                 </c:if>
                                 <c:if test="${m.quantity <= 0}">
@@ -206,15 +223,19 @@
                                 </c:if>
                             </div>
                         </div>
-
                     </a>
                 </div>
-
             </c:if>
-        </c:forEach>    </div>
-    <label><strong style="margin-left: 14.6cm; color: darkblue"><a href="/sanphamviewkh?type=dienthoai" style="list-style: none;color: darkblue; text-decoration: none">Xem thêm sản phẩm »</a></strong></label>
+        </c:forEach>
+    </div>
 
+    <label>
+        <strong style="margin-left: 14.6cm; color: darkblue">
+            <a href="/sanphamviewkh?type=dienthoai" style="list-style: none;color: darkblue; text-decoration: none">Xem thêm sản phẩm »</a>
+        </strong>
+    </label>
 </div>
+
 
 <div class="container" style="background: #fff;margin-top: 30px">
     <label id="title">Laptop</label>

@@ -68,6 +68,8 @@ public class giohangCON {
 
         if (!found) {
             sanphamchitiet.setQuantity(1);  // số lượng mặc định 1 khi thêm mới
+            int priceAfterDiscount = sanphamchitiet.getPriceAfterDiscount().intValue();
+            sanphamchitiet.setPricespct(priceAfterDiscount);
             cart.add(sanphamchitiet);
         }
 

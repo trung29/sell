@@ -27,6 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -109,11 +110,22 @@ public class hoadonCON {
             hdct.setSanphamchitietEN(spct);
 
             int quantity = quantities.get(i);
-            Integer price = spct.getPricespct();
+            Integer pricetruoc = spct.getPricespct(); // giá gốc
+            Integer pricesau = spct.getPriceAfterDiscount().intValue(); // ✅ Lấy giá sau giảm
 
             hdct.setQuantity(quantity);
-            hdct.setPrice(price);
-            hdct.setSubtotal(quantity * price);
+            hdct.setPrice(pricesau);
+            hdct.setOriginalPrice(pricetruoc); // ✅ Giá gốc lúc mua
+            hdct.setSubtotal(quantity * pricesau);
+            System.out.println("giá gốc: "+ pricetruoc);
+            System.out.println("giá sau giảm: "+ pricesau);
+            if (spct.getKhuyenmaiEN() != null && spct.getKhuyenmaiEN().getStatus().equals("Hoạt động")) {
+                hdct.setDiscounttype(spct.getKhuyenmaiEN().getType()); // phantram hoặc tienmat
+                hdct.setDiscountvalue(spct.getKhuyenmaiEN().getValue()); // số %
+            } else {
+                hdct.setDiscounttype("none");
+                hdct.setDiscountvalue(BigDecimal.ZERO);
+            }
 
             hoadonchitietSER.save(hdct);
 

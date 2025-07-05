@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    static String[] HEADERS = { "Name", "Description", "Type", "Status", "Price" };
+    static String[] HEADERS = { "Name", "Type", "Description", "Price", "Status" };
 
     public static boolean hasExcelFormat(MultipartFile file) {
         return TYPE.equals(file.getContentType());
@@ -44,10 +44,10 @@ public class ExcelHelper {
                 sanphamEN product = new sanphamEN();
 
                 String name = formatter.formatCellValue(currentRow.getCell(0));        // Name
-                String type = formatter.formatCellValue(currentRow.getCell(2));        // Type
-                String description = formatter.formatCellValue(currentRow.getCell(1)); // Description
-                String priceStr = formatter.formatCellValue(currentRow.getCell(4));    // Price
-                String status = formatter.formatCellValue(currentRow.getCell(3));      // Status
+                String type = formatter.formatCellValue(currentRow.getCell(1));        // Type
+                String description = formatter.formatCellValue(currentRow.getCell(2)); // Description
+                String priceStr = formatter.formatCellValue(currentRow.getCell(3));    // Price
+                String status = formatter.formatCellValue(currentRow.getCell(4));      // Status
 
 
                 // ✅ Validate các cột bắt buộc

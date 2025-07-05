@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface khuyenmaiSER {
     List<khuyenmaiEN> findAll();
+
+    khuyenmaiEN save(khuyenmaiEN khuyenmaiEN);
 }
