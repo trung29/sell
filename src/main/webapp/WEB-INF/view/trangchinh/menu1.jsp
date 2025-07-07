@@ -220,6 +220,9 @@
                     <c:if test="${sessionScope.nhanvienLogin ne null and sessionScope.nhanvienLogin.role eq 'Quản lý'}">
                     <li><a href="/nhanvien-list"><i class="fas fa-users"></i> Nhân viên</a></li>
                     </c:if>
+                    <c:if test="${sessionScope.nhanvienLogin ne null and sessionScope.nhanvienLogin.role eq 'Quản lý'}">
+                        <li><a href="/khuyenmai-list"><i class="fas fa-money"></i> Khuyến mãi</a></li>
+                    </c:if>
                     <li><a href="/khachhang-list"><i class="fas fa-user-friends"></i> Khách hàng</a></li>
                     <li><a href="/hoadon-list"><i class="fas fa-file-alt"></i> Đơn hàng</a></li>
                     <li><a href="/sanphamchitiet-list"><i class="fas fa-file-alt"></i> Sản phẩm</a></li>

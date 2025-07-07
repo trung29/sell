@@ -18,7 +18,7 @@
 <br>
 
     <button type="button" class="btn btn-dark" style="margin-left:10px;margin-top: 5px"><a style="list-style: none ; color: white; text-decoration: none"
-      href="<%= session.getAttribute("nhanvienLogin") == null ? "login" :"nhanvien-add" %>">Thêm nhân viên mới </a></button>
+      href="<%= session.getAttribute("nhanvienLogin") == null ? "login" :"khuyenmai-add" %>">Thêm nhân khuyến mãi </a></button>
 
     <br>
 

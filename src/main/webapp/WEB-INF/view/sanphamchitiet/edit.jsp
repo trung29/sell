@@ -20,12 +20,20 @@
             <input type="hidden" name="id" value="${sanphamchitiet.id}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
         </div>
         <div class="mb-3">
-            <label class="form-label">Sản phẩm</label>
-            <select class="form-select" aria-label="Default select example" name="sanphamEN.id">
-                <c:forEach items="${sanphamCBX}" var="acc">
-                    <c:if test="${acc.type eq sanphamchitiet.sanphamEN.type}">
-                        <option value="${acc.id}" ${acc.id == sanphamchitiet.sanphamEN.id ? 'selected' : ''}>${acc.name}</option>
-                    </c:if>
+            <label class="form-label">Khuyến mãi</label>
+            <select class="form-select" aria-label="Default select example" name="khuyenmaiEN">
+                <option value="" >-- Không --</option>
+                <c:forEach items="${khuyenmaiCBX}" var="acc">
+                        <option value="${acc.id}">${acc.name} -
+                        <c:choose>
+                            <c:when test="${acc.type eq 'phantram'}">
+                                Giảm ${acc.value}%
+                            </c:when>
+                            <c:when test="${acc.type eq 'tienmat'}">
+                                Giảm ${acc.value}VNĐ
+                            </c:when>
+                        </c:choose>
+                        </option>
                 </c:forEach>
             </select>
         </div>
@@ -40,9 +48,15 @@
             <input type="text" name="size"  class="form-control" value="${sanphamchitiet.size}">
         </div>
         <div class="mb-3">
+            <label>Price</label>
+            <input type="text" name="pricespct"  class="form-control" value="${sanphamchitiet.pricespct}">
+        </div>
+        <div class="mb-3">
             <label>Quantity</label>
             <input type="text" name="quantity" class="form-control" value="${sanphamchitiet.quantity}">
         </div>
+
+        <input type="hidden" name="sanphamEN.id" value="${sanphamchitiet.sanphamEN.id}">
         <div class="mb-3">
             <label>Image</label>
             <input type="file" name="image" class="form-control" id="imageInput">
@@ -68,6 +82,7 @@
     </form>
 
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

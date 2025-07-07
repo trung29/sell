@@ -65,14 +65,9 @@
                         <c:otherwise>Không có</c:otherwise>
                     </c:choose>
                 </td>
-
-
-
-
                 <td>
                     <fmt:formatNumber value="${ct.subtotal}" type="number" groupingUsed="true"/>đ
                 </td>
-
             </tr>
         </c:forEach>
         </tbody>

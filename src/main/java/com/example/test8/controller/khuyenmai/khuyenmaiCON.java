@@ -9,6 +9,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,6 +37,15 @@ public class khuyenmaiCON {
                 System.out.println("⚡ Đã set Không hoạt động cho: " + kn.getName());
             }
         }
+    }
+    @GetMapping("khuyenmai-add")
+    public String khuyenmaiadd(){
+        return "/khuyenmai/add";
+    }
+    @PostMapping("khuyenmai-save")
+    public String khuyenmaisave(khuyenmaiEN khuyenmaiEN){
+        khuyenmaiSER.save(khuyenmaiEN);
+        return "redirect:/khuyenmai-list";
     }
 
 }
