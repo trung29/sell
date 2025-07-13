@@ -110,7 +110,7 @@
                 <img id="qrImage" src="" alt="QR Code" style="width:300px; height:300px; margin:10px 0;">
                 <br>
                 <button type="submit" class="btn btn-success">✅ Xác nhận Thanh toán</button>
-                <button type="button" onclick="closeQRCode()" class="btn btn-danger">❌ Đóng</button>
+                <button type="button" onclick="closeQRCode()" class="btn btn-danger">❌ Đóngg</button>
             </div>
         </div>
     </c:if>
