@@ -255,8 +255,25 @@
                                 <div class="product-title">
                                     <b>${m.size}</b> - <strong>${m.color}</strong>
                                 </div>
-                                <div class="product-price"> <fmt:formatNumber value="${m.sanphamEN.price}" type="number" groupingUsed="true"/>đ</div>
-
+                                <!-- ✅ Giá sản phẩm -->
+                                <div class="product-price">
+                                    <c:choose>
+                                        <c:when test="${m.khuyenmaiEN ne null && m.khuyenmaiEN.status eq 'Hoạt động'}">
+                                            <!-- Giá gốc có gạch ngang -->
+                                            <span style="text-decoration: line-through; color: gray;">
+                                                <fmt:formatNumber value="${m.pricespct}" type="number" groupingUsed="true"/>đ
+                                            </span> -
+                                            <!-- Giá sau giảm màu đỏ -->
+                                            <span style="color: red; font-weight: bold;">
+                                                <fmt:formatNumber value="${m.priceAfterDiscount}" type="number" groupingUsed="true"/>đ
+                                            </span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <!-- Không có khuyến mãi, chỉ hiển thị giá gốc -->
+                                            <fmt:formatNumber value="${m.pricespct}" type="number" groupingUsed="true"/>đ
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
                                 <c:if test="${m.quantity > 0}">
                                     <div class="middle">
                                             <%--                                        <button class="btn1 buy-now-link" data-id="${m.id}"><a href="/cart-add/${m.id}">Mua ngay</a></button>--%>
@@ -300,8 +317,25 @@
                                     <div class="product-title">
                                         <b>${m.size}</b> - <strong>${m.color}</strong>
                                     </div>
-                                    <div class="product-price"> <fmt:formatNumber value="${m.pricespct}" type="number" groupingUsed="true"/>đ</div>
-
+                                    <!-- ✅ Giá sản phẩm -->
+                                    <div class="product-price">
+                                        <c:choose>
+                                            <c:when test="${m.khuyenmaiEN ne null && m.khuyenmaiEN.status eq 'Hoạt động'}">
+                                                <!-- Giá gốc có gạch ngang -->
+                                                <span style="text-decoration: line-through; color: gray;">
+                                                <fmt:formatNumber value="${m.pricespct}" type="number" groupingUsed="true"/>đ
+                                            </span> -
+                                                <!-- Giá sau giảm màu đỏ -->
+                                                <span style="color: red; font-weight: bold;">
+                                                <fmt:formatNumber value="${m.priceAfterDiscount}" type="number" groupingUsed="true"/>đ
+                                            </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <!-- Không có khuyến mãi, chỉ hiển thị giá gốc -->
+                                                <fmt:formatNumber value="${m.pricespct}" type="number" groupingUsed="true"/>đ
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
                                     <c:if test="${m.quantity > 0}">
                                         <div class="middle">
                                                 <%--                                        <button class="btn1 buy-now-link" data-id="${m.id}"><a href="/cart-add/${m.id}">Mua ngay</a></button>--%>
